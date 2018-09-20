@@ -385,6 +385,9 @@ allocate_client_ready (QmiDevice *dev,
     case QMI_SERVICE_LOC:
         qmicli_loc_run (dev, QMI_CLIENT_LOC (client), cancellable);
         return;
+    case QMI_SERVICE_QOS:
+        qmicli_qos_run (dev, QMI_CLIENT_QOS (client), cancellable);
+        return;
     default:
         g_assert_not_reached ();
     }
@@ -752,6 +755,12 @@ parse_actions (void)
         actions_enabled++;
     }
 
+    /* QOS options? */
+    if (qmicli_qos_options_enabled ()) {
+        service = QMI_SERVICE_QOS;
+        actions_enabled++;
+    }
+
     /* Cannot mix actions from different services */
     if (actions_enabled > 1) {
         g_printerr ("error: cannot execute multiple actions of different services\n");
@@ -797,6 +806,8 @@ int main (int argc, char **argv)
                                 qmicli_voice_get_option_group ());
     g_option_context_add_group (context,
                                 qmicli_loc_get_option_group ());
+    g_option_context_add_group (context,
+                                qmicli_qos_get_option_group ());
     g_option_context_add_main_entries (context, main_entries, NULL);
     if (!g_option_context_parse (context, &argc, &argv, &error)) {
         g_printerr ("error: %s\n",

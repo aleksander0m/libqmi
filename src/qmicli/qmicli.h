@@ -98,4 +98,11 @@ void          qmicli_loc_run              (QmiDevice *device,
                                            QmiClientLoc *client,
                                            GCancellable *cancellable);
 
+/* QoS group */
+GOptionGroup *qmicli_qos_get_option_group (void);
+gboolean      qmicli_qos_options_enabled  (void);
+void          qmicli_qos_run              (QmiDevice *device,
+                                           QmiClientQos *client,
+                                           GCancellable *cancellable);
+
 #endif /* __QMICLI_H__ */
