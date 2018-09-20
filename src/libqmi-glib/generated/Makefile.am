@@ -18,7 +18,9 @@ GENERATED_H = \
 	qmi-oma.h \
 	qmi-wda.h \
 	qmi-voice.h \
-	qmi-loc.h
+	qmi-loc.h \
+	qmi-qos.h \
+	$(NULL)
 
 GENERATED_C = \
 	qmi-error-types.c \
@@ -38,7 +40,9 @@ GENERATED_C = \
 	qmi-oma.c \
 	qmi-wda.c \
 	qmi-voice.c \
-	qmi-loc.c
+	qmi-loc.c \
+	qmi-qos.c \
+	$(NULL)
 
 GENERATED_SECTIONS = \
 	qmi-ctl.sections \
@@ -53,7 +57,9 @@ GENERATED_SECTIONS = \
 	qmi-oma.sections \
 	qmi-wda.sections \
 	qmi-voice.sections \
-	qmi-loc.sections
+	qmi-loc.sections \
+	qmi-qos.sections \
+	$(NULL)
 
 # Error types
 qmi-error-types.h: $(top_srcdir)/src/libqmi-glib/qmi-errors.h $(top_srcdir)/build-aux/templates/qmi-error-types-template.h
@@ -90,10 +96,11 @@ ENUMS = \
 	$(top_srcdir)/src/libqmi-glib/qmi-enums-wda.h \
 	$(top_srcdir)/src/libqmi-glib/qmi-enums-voice.h \
 	$(top_srcdir)/src/libqmi-glib/qmi-enums-loc.h \
+	$(top_srcdir)/src/libqmi-glib/qmi-enums-qos.h \
 	$(top_srcdir)/src/libqmi-glib/qmi-device.h
 qmi-enum-types.h:  $(ENUMS) $(top_srcdir)/build-aux/templates/qmi-enum-types-template.h
 	$(AM_V_GEN) $(GLIB_MKENUMS) \
-		--fhead "#ifndef __LIBQMI_GLIB_ENUM_TYPES_H__\n#define __LIBQMI_GLIB_ENUM_TYPES_H__\n#include \"qmi-enums.h\"\n#include \"qmi-enums-wds.h\"\n#include \"qmi-enums-dms.h\"\n#include \"qmi-enums-nas.h\"\n#include \"qmi-enums-wms.h\"\n#include \"qmi-enums-pds.h\"\n#include \"qmi-enums-pdc.h\"\n#include \"qmi-enums-pbm.h\"\n#include \"qmi-enums-uim.h\"\n#include \"qmi-enums-oma.h\"\n#include \"qmi-enums-wda.h\"\n#include \"qmi-enums-voice.h\"\n#include \"qmi-enums-loc.h\"\n#include \"qmi-device.h\"\n" \
+		--fhead "#ifndef __LIBQMI_GLIB_ENUM_TYPES_H__\n#define __LIBQMI_GLIB_ENUM_TYPES_H__\n#include \"qmi-enums.h\"\n#include \"qmi-enums-wds.h\"\n#include \"qmi-enums-dms.h\"\n#include \"qmi-enums-nas.h\"\n#include \"qmi-enums-wms.h\"\n#include \"qmi-enums-pds.h\"\n#include \"qmi-enums-pdc.h\"\n#include \"qmi-enums-pbm.h\"\n#include \"qmi-enums-uim.h\"\n#include \"qmi-enums-oma.h\"\n#include \"qmi-enums-wda.h\"\n#include \"qmi-enums-voice.h\"\n#include \"qmi-enums-loc.h\"\n#include \"qmi-enums-qos.h\"\n#include \"qmi-device.h\"\n" \
 		--template $(top_srcdir)/build-aux/templates/qmi-enum-types-template.h \
 		--ftail "#endif /* __LIBQMI_GLIB_ENUM_TYPES_H__ */\n" \
 		$(ENUMS) > $@
@@ -265,6 +272,15 @@ qmi-loc.h qmi-loc.c qmi-loc.sections: $(top_srcdir)/data/qmi-service-loc.json $(
 			--include $(top_srcdir)/data/qmi-common.json \
 			--output qmi-loc
 
+# QoS service
+qmi-qos.h qmi-qos.c qmi-qos.sections: $(top_srcdir)/data/qmi-service-qos.json $(top_srcdir)/build-aux/qmi-codegen/*.py $(top_srcdir)/build-aux/qmi-codegen/qmi-codegen
+	$(AM_V_GEN) \
+		rm -f qmi-qos.h && \
+		rm -f qmi-qos.c && \
+		$(PYTHON) $(top_srcdir)/build-aux/qmi-codegen/qmi-codegen \
+			--input $(top_srcdir)/data/qmi-service-qos.json \
+			--include $(top_srcdir)/data/qmi-common.json \
+			--output qmi-qos
 
 BUILT_SOURCES = $(GENERATED_H) $(GENERATED_C)
 
@@ -300,6 +316,8 @@ nodist_include_HEADERS = \
 	qmi-oma.h \
 	qmi-wda.h \
 	qmi-voice.h \
-	qmi-loc.h
+	qmi-loc.h \
+	qmi-qos.h \
+	$(NULL)
 
 CLEANFILES = $(GENERATED_H) $(GENERATED_C) $(GENERATED_SECTIONS)

@@ -1,0 +1,212 @@
+
+[
+  // *********************************************************************************
+  {  "name"    : "QOS",
+     "type"    : "Service" },
+
+  // *********************************************************************************
+  {  "name"    : "QMI Client QOS",
+     "type"    : "Client",
+     "since"   : "1.0" },
+
+  // *********************************************************************************
+  {  "name"    : "QMI Message QOS",
+     "type"    : "Message-ID-Enum" },
+
+  // *********************************************************************************
+  {  "name"    : "QMI Indication DMS",
+     "type"    : "Indication-ID-Enum" },
+
+  // *********************************************************************************
+
+  { "common-ref"    : "QOS ID",
+    "name"          : "QOS Id",
+    "id"            : "0x01",
+    "mandatory"     : "yes",
+    "type"          : "TLV",
+    "since"         : "1.22",
+    "format"        : "guint32" },
+
+  // *********************************************************************************
+  {  "name"    : "Reset",
+     "type"    : "Message",
+     "service" : "QOS",
+     "id"      : "0x0000",
+     "version" : "1.0",
+     "since"   : "1.22",
+     "output"  : [ { "common-ref" : "Operation Result" } ] },
+
+  // *********************************************************************************
+
+  {  "name"    : "Request",
+     "type"    : "Message",
+     "service" : "QOS",
+     "id"      : "0x0020",
+     "version" : "1.0",
+     "since"   : "1.22",
+     "output"  : [ { "common-ref" : "Operation Result" } ] },
+
+  // *********************************************************************************
+
+  {  "name"    : "Release",
+     "type"    : "Message",
+     "service" : "QOS",
+     "id"      : "0x0021",
+     "version" : "1.0",
+     "since"   : "1.22",
+     "output"  : [ { "common-ref" : "Operation Result" } ] },
+
+  // *********************************************************************************
+
+  {  "name"    : "Suspend",
+     "type"    : "Message",
+     "service" : "QOS",
+     "id"      : "0x0022",
+     "version" : "1.0",
+     "since"   : "1.22",
+     "output"  : [ { "common-ref" : "Operation Result" } ] },
+
+  // *********************************************************************************
+
+  {  "name"    : "Resume",
+     "type"    : "Message",
+     "service" : "QOS",
+     "id"      : "0x0023",
+     "version" : "1.0",
+     "since"   : "1.22",
+     "output"  : [ { "common-ref" : "Operation Result" } ] },
+
+  // *********************************************************************************
+
+  {  "name"    : "Get Granted",
+     "type"    : "Message",
+     "service" : "QOS",
+     "id"      : "0x0025",
+     "version" : "1.0",
+     "since"   : "1.22",
+     "input"   : [ { "common-ref" : "QOS ID" } ],
+     "output"  : [ { "common-ref" : "Operation Result" } ] },
+
+  // *********************************************************************************
+
+  {  "name"    : "Get Flow Status",
+     "type"    : "Message",
+     "service" : "QOS",
+     "id"      : "0x0026",
+     "version" : "1.0",
+     "since"   : "1.22",
+     "input"   : [ { "common-ref" : "QOS ID" } ],
+     "output"  : [ { "common-ref" : "Operation Result" },
+                   { "name"          : "Value",
+                     "id"            : "0x01",
+                     "type"          : "TLV",
+                     "since"         : "1.22",
+                     "format"        : "guint8",
+                     "public-format" : "QmiQosStatus" } ] },
+
+//             u8 qos_flow_activate_ind[] = {
+//                 0x01,0x15,0x00,0x80,0x04,0xFF,0x04,0x00,0x00,
+//                 0x26,0x00,0x09,0x00,0x01,0x06,0x00,0xDD,0xCC,0xBB,0xAA,0x01,0x01
+//             };
+//             u8 qos_flow_suspend_ind[] = {
+//                 0x01,0x15,0x00,0x80,0x04,0xFF,0x04,0x00,0x00,
+//                 0x26,0x00,0x09,0x00,0x01,0x06,0x00,0xDD,0xCC,0xBB,0xAA,0x02,0x02
+//             };
+//             u8 qos_flow_gone_ind[] = {
+//                 0x01,0x15,0x00,0x80,0x04,0xFF,0x04,0x00,0x00,
+//                 0x26,0x00,0x09,0x00,0x01,0x06,0x00,0xDD,0xCC,0xBB,0xAA,0x03,0x03
+//             };
+
+  {  "name"    : "Flow Status",
+     "type"    : "Message",
+     "service" : "QOS",
+     "id"      : "0x0026",
+     "version" : "1.0",
+     "since"   : "1.22",
+     "input"   : [ { "common-ref" : "QOS ID" } ],
+     "output"  : [ { "common-ref" : "Operation Result" },
+                   { "name"     : "Value",
+                     "id"       : "0x01",
+                     "type"     : "TLV",
+                     "since"    : "1.22",
+                     "format"   : "sequence",
+                     "contents" : [ { "name"   : "QOS ID",
+                                      "format" : "guint32" },
+                                    { "name"          : "TX Status",
+                                      "format"        : "guint8",
+                                      "public-format" : "QmiQosStatus" },
+                                    { "name"          : "RX Status", /// ???
+                                      "format"        : "guint8",
+                                      "public-format" : "QmiQosStatus" } ] } ] },
+
+  // *********************************************************************************
+
+  {  "name"    : "Get Network Status",
+     "type"    : "Message",
+     "service" : "QOS",
+     "id"      : "0x0027",
+     "version" : "1.0",
+     "since"   : "1.22",
+     "output"  : [ { "common-ref" : "Operation Result" },
+                   { "name"          : "QoS Supported",
+                     "id"            : "0x01",
+                     "type"          : "TLV",
+                     "since"         : "1.22",
+                     "format"        : "guint8",
+                     "public-format" : "gboolean" } ] },
+
+//             u8 qos_support_ind[] = {
+//                 0x01,0x15,0x00,0x80,0x04,0xFF,0x04,0x00,0x00,
+//                 0x27,0x00,0x09,0x00,0x01,0x01,0x00,0x01,0x10,0x02,0x00,0x01,0x80
+//             };
+
+  {  "name"    : "Network Status",
+     "type"    : "Indication",
+     "service" : "QOS",
+     "id"      : "0x0027",
+     "version" : "1.0",
+     "since"   : "1.22",
+     "output"  : [ { "name"          : "QoS Supported",
+                     "id"            : "0x01",
+                     "type"          : "TLV",
+                     "since"         : "1.22",
+                     "format"        : "guint8",
+                     "public-format" : "gboolean" }
+//                   { "name"          : "????",
+//                     "id"            : "0x10",
+//                     "type"          : "TLV",
+//                     "since"         : "1.22",
+//                     "format"        : "guint16" },
+                 ] },
+
+  // *********************************************************************************
+
+  {  "name"    : "Get Network Profile",
+     "type"    : "Message",
+     "service" : "QOS",
+     "id"      : "0x0028",
+     "version" : "1.0",
+     "since"   : "1.22",
+     "output"  : [ { "common-ref" : "Operation Result" } ] },
+
+  // *********************************************************************************
+
+  {  "name"    : "Swi Read Data Stats",
+     "type"    : "Message",
+     "service" : "QOS",
+     "id"      : "0x5556",
+     "version" : "1.0",
+     "since"   : "1.22",
+     "output"  : [ { "common-ref" : "Operation Result" } ] },
+
+  // *********************************************************************************
+
+  {  "name"    : "Swi Read Apn Extra Parameters",
+     "type"    : "Message",
+     "service" : "QOS",
+     "id"      : "0x5557",
+     "version" : "1.0",
+     "since"   : "1.22",
+     "output"  : [ { "common-ref" : "Operation Result" } ] }
+
+]

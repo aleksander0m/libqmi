@@ -1186,6 +1186,18 @@ qmi_loc_delete_sv_info_get_type
 </SECTION>
 
 <SECTION>
+<FILE>qmi-enums-qos</FILE>
+QmiQosStatus
+<SUBSECTION Methods>
+qmi_qos_status_get_string
+<SUBSECTION Private>
+qmi_qos_status_build_string_from_mask
+<SUBSECTION Standard>
+QMI_TYPE_QOS_STATUS
+qmi_qos_status_get_typ
+</SECTION>
+
+<SECTION>
 <FILE>qmi-errors</FILE>
 QmiCoreError
 QmiProtocolError

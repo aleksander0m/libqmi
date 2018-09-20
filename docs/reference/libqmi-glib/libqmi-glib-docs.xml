@@ -413,6 +413,25 @@
   </chapter>
 
   <chapter>
+    <title>QoS Service (QoS)</title>
+    <xi:include href="xml/qmi-client-qos.xml"/>
+    <section>
+      <title>QoS Requests</title>
+      <xi:include href="xml/qmi-message-qos-reset.xml"/>
+      <xi:include href="xml/qmi-message-qos-request.xml"/>
+      <xi:include href="xml/qmi-message-qos-release.xml"/>
+      <xi:include href="xml/qmi-message-qos-suspend.xml"/>
+      <xi:include href="xml/qmi-message-qos-resume.xml"/>
+      <xi:include href="xml/qmi-message-qos-get-granted.xml"/>
+      <xi:include href="xml/qmi-message-qos-get-flow-status.xml"/>
+      <xi:include href="xml/qmi-message-qos-get-network-status.xml"/>
+      <xi:include href="xml/qmi-message-qos-get-network-profile.xml"/>
+      <xi:include href="xml/qmi-message-qos-swi-read-data-stats.xml"/>
+      <xi:include href="xml/qmi-message-qos-swi-read-apn-extra-parameters.xml"/>
+    </section>
+  </chapter>
+
+  <chapter>
     <title>Compatibility with older versions</title>
     <xi:include href="xml/qmi-compat.xml"/>
   </chapter>

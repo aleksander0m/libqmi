@@ -19,7 +19,9 @@ ALL_SECTIONS = \
 	$(top_builddir)/src/libqmi-glib/generated/qmi-oma.sections \
 	$(top_builddir)/src/libqmi-glib/generated/qmi-wda.sections \
 	$(top_builddir)/src/libqmi-glib/generated/qmi-voice.sections \
-	$(top_builddir)/src/libqmi-glib/generated/qmi-loc.sections
+	$(top_builddir)/src/libqmi-glib/generated/qmi-loc.sections \
+	$(top_builddir)/src/libqmi-glib/generated/qmi-qos.sections \
+	$(NULL)
 
 $(DOC_MODULE)-sections.mstamp: $(ALL_SECTIONS)
 	$(AM_V_GEN) \

@@ -78,6 +78,9 @@
 #include "qmi-enums-loc.h"
 #include "qmi-loc.h"
 
+#include "qmi-enums-qos.h"
+#include "qmi-qos.h"
+
 /* generated */
 #include "qmi-error-types.h"
 #include "qmi-enum-types.h"
